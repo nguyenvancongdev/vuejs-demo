@@ -1,5 +1,6 @@
 <template>
  chào mọi người
+ <div>toi la cong</div>
  <button @click="conso" >ttt</button>
 </template>
 
