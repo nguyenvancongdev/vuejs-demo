@@ -1,5 +1,5 @@
 <template>
- hrkk
+ chào mọi người
  <button @click="conso" >ttt</button>
 </template>
 
