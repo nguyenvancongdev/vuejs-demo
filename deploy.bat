@@ -1,5 +1,5 @@
 cd dist
-echo vuejs-demo.congnguyen.dev > CNAME.txt
+echo vuejs-demo.congnguyen.dev > CNAME
 git init
 git add -A
 git commit -m "hello"
