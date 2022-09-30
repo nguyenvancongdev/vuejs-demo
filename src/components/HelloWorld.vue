@@ -1,10 +1,13 @@
 <template>
  chào mọi người
  <div>toi la cong</div>
- <button @click="conso" >ttt</button>
+ <button @click="conso()" >ttt</button>
 </template>
 
 <script>
+
+import db from '@/fb'
+import { collection, getDocs } from 'firebase/firestore/lite';
 export default {
   name: 'HelloWorld',
   props: {
@@ -16,23 +19,18 @@ export default {
     }
   },
   methods:{
-    conso(){
-      //tim cac gia tri giong nhau
-      let a = [{hanh: 1, hue: 3}, {hanh: 1, hue: 3}, {hanh:3, cong: 5}, {cong: 9}]
-      // let b = [... new Set(a.filter(item => item.hanh ).map(item => item.hanh ))]
-      let c = {tottol: [],hanh: []}
-      a.forEach(item => {if (!c.hanh.includes(item.hanh)) { c.tottol.push(item); c.hanh.push(item.hanh)}})
-      console.log(c)
-      
-     
-
-
+   async conso(){
+    const citiesCol = collection(db, 'hello');
+    const citySnapshot = await getDocs(citiesCol);
+    const cityList = citySnapshot.docs.map(doc => doc.data());
+    console.log(cityList)
+    return cityList;
+   
     },
     setTralet(){
-      // let a = [[1,2,3],[3,5,6,7,8],['34','aa']]
-      // console.log(a)
-      // let b = a.reduce((tottol,item) => [...tottol,...item] )
-      // console.log(b)
+      let a = [[1,2,3],[3,5,6,7,8],['34','aa']]
+      console.log(a)
+    
     }
   },
 

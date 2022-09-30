@@ -4,4 +4,8 @@ module.exports = defineConfig({
 })
 module.exports ={
   publicPath:'/'
+  // ,
+  // configureWebpack : {
+  //   devtool: 'source-map'
+  // }
 }
