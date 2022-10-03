@@ -9,17 +9,28 @@
     <button @click="add()" >add</button>
 
   </div>
-   <div v-for="item in listdata" :key="item.id">
-    {{item?.toi}}
-    <button @click='showedit(item)'>edit</button>
-    <input v-if="item.id === editid" v-model="valueupdate"/>
-    <button v-if="item.id === editid" @click="update(item.id)">update</button>
-    <button  @click="deleterow(item.id)">delete</button>
-    
+  <div class="table-conten">
+  <table>
+    <tr>
+      <th>Tên</th>
+      <th>Chỉnh sửa</th>
+      <th>Input</th>
+      <th>Update</th>
+    </tr>
+    <tr v-for="item in listdata" :key="item.id">
+      <td> {{item?.toi}}</td>
+      <td> <button @click='showedit(item)'>edit</button></td>
+      <td> <input v-if="item.id === editid" v-model="valueupdate"/></td>
+      <td> <button v-if="item.id === editid" @click="update(item.id)">update</button></td>
+      <td>  <button  @click="deleterow(item.id)">delete</button></td>
+    </tr>
+  </table>
+  </div>  
   
-  </div>
  </div>
  <button @click="conso()" >list</button>
+ <button @click="sql()" >sql query</button>
+ <button @click="sqlimit()" >sql query last</button>
 
 
 </template>
@@ -27,7 +38,7 @@
 <script>
 
 import db from '@/fb'
-import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore/lite';
+import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc, query, orderBy, limit, limitToLast } from 'firebase/firestore/lite';
 // import { query, orderBy } from "firebase/firestore";  
 export default {
   name: 'HelloWorld',
@@ -52,10 +63,28 @@ export default {
       this.editid = item.id
       this.valueupdate = item.toi
     },
-    //get all
-   async conso(){
+    //get total
+    async conso(){
     const citiesCol = collection(db, 'hello');
     const citySnapshot = await getDocs(citiesCol);
+    this.listdata = citySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}));
+   
+   
+    },
+    //get all
+   async sql(){
+ 
+    const q = query(collection(db, 'hello'), limitToLast(5), orderBy('toi'), )
+    const citySnapshot = await getDocs(q)
+    this.listdata = citySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}));
+   
+   
+    },
+    //get all
+   async sqlimit(){
+ 
+    const q = query(collection(db, 'hello'), limit(5), orderBy('toi'), )
+    const citySnapshot = await getDocs(q)
     this.listdata = citySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}));
    
    
@@ -115,5 +144,9 @@ li {
 }
 a {
   color: #42b983;
+}
+.table-conten {
+  display: flex;
+  justify-content: center;
 }
 </style>
