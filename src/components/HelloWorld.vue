@@ -38,6 +38,8 @@
 <script>
 
 import db from '@/fb'
+// import {MyFunctions} from '@/controller/hello.controller'
+import {getHellos} from '@/controller/hello.controller'
 import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc, query, orderBy, limit, limitToLast } from 'firebase/firestore/lite';
 // import { query, orderBy } from "firebase/firestore";  
 export default {
@@ -64,13 +66,18 @@ export default {
       this.valueupdate = item.toi
     },
     //get total
+    // async conso(){
+    // const citiesCol = collection(db, 'hello');
+    // const citySnapshot = await getDocs(citiesCol);
+    // this.listdata = citySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}));
+   
+   
+    // },
+    //get total
+
     async conso(){
-    const citiesCol = collection(db, 'hello');
-    const citySnapshot = await getDocs(citiesCol);
-    this.listdata = citySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}));
-   
-   
-    },
+    this.listdata = await getHellos()
+  },
     //get all
    async sql(){
  
@@ -150,3 +157,5 @@ a {
   justify-content: center;
 }
 </style>
+<!-- giờ mình sẽ cần quan ly lai du an -->
+<!-- writeBatch nó sẽ khiến mình thao tác chuẩn hơn và tiến hành connect nó ngon hơn  -->
