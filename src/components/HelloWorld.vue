@@ -1,161 +1,149 @@
 <template>
- chào mọi người
- <div>toi la cong</div>
- <div>
-  <div>
-    <input v-model="addvalue" />
-  </div>
-  <div>
-    <button @click="add()" >add</button>
+  <v-container>
+    <v-row class="text-center">
+      <v-col cols="12">
+        <v-img
+          :src="require('../assets/logo.svg')"
+          class="my-3"
+          contain
+          height="200"
+        />
+      </v-col>
 
-  </div>
-  <div class="table-conten">
-  <table>
-    <tr>
-      <th>Tên</th>
-      <th>Chỉnh sửa</th>
-      <th>Input</th>
-      <th>Update</th>
-    </tr>
-    <tr v-for="item in listdata" :key="item.id">
-      <td> {{item?.toi}}</td>
-      <td> <button @click='showedit(item)'>edit</button></td>
-      <td> <input v-if="item.id === editid" v-model="valueupdate"/></td>
-      <td> <button v-if="item.id === editid" @click="update(item.id)">update</button></td>
-      <td>  <button  @click="deleterow(item.id)">delete</button></td>
-    </tr>
-  </table>
-  </div>  
-  
- </div>
- <button @click="conso()" >list</button>
- <button @click="sql()" >sql query</button>
- <button @click="sqlimit()" >sql query last</button>
+      <v-col class="mb-4">
+        <h1 class="display-2 font-weight-bold mb-3">
+          Welcome to the Vuetify 3 Beta
+        </h1>
 
 
+        <p class="subheading font-weight-regular">
+          For help and collaboration with other Vuetify developers,
+          <br>please join our online
+          <a
+            href="https://community.vuetifyjs.com"
+            target="_blank"
+          >Discord Community</a>
+        </p>
+      </v-col>
+
+      <v-col
+        class="mb-5"
+        cols="12"
+      >
+        <h2 class="headline font-weight-bold mb-5">
+          What's next?
+        </h2>
+
+        <v-row justify="center">
+          <a
+            v-for="(next, i) in whatsNext"
+            :key="i"
+            :href="next.href"
+            class="subheading mx-3"
+            target="_blank"
+          >
+            {{ next.text }}
+          </a>
+        </v-row>
+      </v-col>
+
+      <v-col
+        class="mb-5"
+        cols="12"
+      >
+        <h2 class="headline font-weight-bold mb-5">
+          Important Links
+        </h2>
+
+        <v-row justify="center">
+          <a
+            v-for="(link, i) in importantLinks"
+            :key="i"
+            :href="link.href"
+            class="subheading mx-3"
+            target="_blank"
+          >
+            {{ link.text }}
+          </a>
+        </v-row>
+      </v-col>
+
+      <v-col
+        class="mb-5"
+        cols="12"
+      >
+        <h2 class="headline font-weight-bold mb-5">
+          Ecosystem
+        </h2>
+
+        <v-row justify="center">
+          <a
+            v-for="(eco, i) in ecosystem"
+            :key="i"
+            :href="eco.href"
+            class="subheading mx-3"
+            target="_blank"
+          >
+            {{ eco.text }}
+          </a>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 
-import db from '@/fb'
-// import {MyFunctions} from '@/controller/hello.controller'
-import {getHellos} from '@/controller/hello.controller'
-import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc, query, orderBy, limit, limitToLast } from 'firebase/firestore/lite';
-// import { query, orderBy } from "firebase/firestore";  
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  },
-  data() {
-    return {
-      count: 0,
-      listdata: [],
-      editid: null,
-      valueupdate: null,
-      addvalue: null,
-    }
-  },
-  created(){
-    this.conso()
-  },
-  computed(){},
-  methods:{
-    showedit(item){
-      this.editid = item.id
-      this.valueupdate = item.toi
-    },
-    //get total
-    // async conso(){
-    // const citiesCol = collection(db, 'hello');
-    // const citySnapshot = await getDocs(citiesCol);
-    // this.listdata = citySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}));
-   
-   
-    // },
-    //get total
 
-    async conso(){
-    this.listdata = await getHellos()
-  },
-    //get all
-   async sql(){
- 
-    const q = query(collection(db, 'hello'), limitToLast(5), orderBy('toi'), )
-    const citySnapshot = await getDocs(q)
-    this.listdata = citySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}));
-   
-   
-    },
-    //get all
-   async sqlimit(){
- 
-    const q = query(collection(db, 'hello'), limit(5), orderBy('toi'), )
-    const citySnapshot = await getDocs(q)
-    this.listdata = citySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}));
-   
-   
-    },
-    //them 1 row:
-    async add(){
-     const citiesCol = collection(db, 'hello');
-     await addDoc(citiesCol, { toi: this.addvalue}).then(()=> {this.addvalue = null, this.conso() })
- 
-     },
-    ///update 1 row thi nhu the nao
-    async update(id){
-     const userDoc = doc(db, 'hello', id);
-     const newFields = {toi: this.valueupdate}
-     await updateDoc(userDoc, newFields).then(() => {this.affterupdate(id)})
-     this.editid = null
-     console.log(100)
-    },
-    //delete
-    async deleterow(id){
-      console.log(100)
-      const userDoc = doc(db, 'hello', id);
-      await deleteDoc(userDoc).then(()=> {
-      this.listdata = this.listdata.filter(item => item.id !== id)
-     })
-    
-
-
-    },
-    affterupdate(id){
-      this.listdata.forEach(item => { if (item.id === id){item.toi = this.valueupdate}  
-        
-      });
-    },
-    setTralet(){
-      let a = [[1,2,3],[3,5,6,7,8],['34','aa']]
-      console.log(a)
-    
-    }
-  },
-
+  data: () => ({
+    ecosystem: [
+      {
+        text: 'vuetify-loader',
+        href: 'https://github.com/vuetifyjs/vuetify-loader/tree/next',
+      },
+      {
+        text: 'github',
+        href: 'https://github.com/vuetifyjs/vuetify/tree/next',
+      },
+      {
+        text: 'awesome-vuetify',
+        href: 'https://github.com/vuetifyjs/awesome-vuetify',
+      },
+    ],
+    importantLinks: [
+      {
+        text: 'Chat',
+        href: 'https://community.vuetifyjs.com',
+      },
+      {
+        text: 'Made with Vuetify',
+        href: 'https://madewithvuejs.com/vuetify',
+      },
+      {
+        text: 'Twitter',
+        href: 'https://twitter.com/vuetifyjs',
+      },
+      {
+        text: 'Articles',
+        href: 'https://medium.com/vuetify',
+      },
+    ],
+    whatsNext: [
+      {
+        text: 'Explore components',
+        href: 'https://vuetifyjs.com',
+      },
+      {
+        text: 'Roadmap',
+        href: 'https://vuetifyjs.com/introduction/roadmap/',
+      },
+      {
+        text: 'Frequently Asked Questions',
+        href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
+      },
+    ],
+  }),
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-.table-conten {
-  display: flex;
-  justify-content: center;
-}
-</style>
-<!-- giờ mình sẽ cần quan ly lai du an -->
-<!-- writeBatch nó sẽ khiến mình thao tác chuẩn hơn và tiến hành connect nó ngon hơn  -->
