@@ -1,22 +1,15 @@
-name: CI
-
+name: Build Vue
 on: [push]
-
 jobs:
-  build:
-
+  build_vue:
     runs-on: ubuntu-latest
-
+    name: Build Vue
     steps:
-    - uses: actions/checkout@v1
-    - name: Build
-      run: |
-        npm install
-        npm run build
-        cd dist
-        echo vuejs-demo.congnguyen.dev > CNAME
-        git init
-        git add -A
-        git commit -m "hello"
-        git push -f https://github.com/nguyenvancongdev/vuejs-demo.git master:gh-pages
-        
+    - uses: actions/checkout@v2
+    - id: Build-Vue
+      uses: xRealNeon/VuePagesAction@1.0.1
+      with:
+        username: 'nguyenvancongdev'
+        reponame: 'vuejs-demo'
+        token: ${{ secrets.TOKEN }}
+        cname: 'vuejs-demo.congnguyen.dev'
