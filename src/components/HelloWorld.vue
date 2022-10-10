@@ -12,12 +12,12 @@
 
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to the Vuetify 3 Beta
+         hello moi nguoi oi
         </h1>
 
 
         <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
+         toi la nguyen van cong
           <br>please join our online
           <a
             href="https://community.vuetifyjs.com"
@@ -31,7 +31,7 @@
         cols="12"
       >
         <h2 class="headline font-weight-bold mb-5">
-          What's next?
+          hello hello ba ocn
         </h2>
 
         <v-row justify="center">
