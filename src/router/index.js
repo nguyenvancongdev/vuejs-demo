@@ -1,6 +1,7 @@
 
 import HelloWorld from '@/components/HelloWorld'
 import AboutToi from '@/components/About'
+import HomeView from '@/views/HomeView'
 import * as VueRouter from 'vue-router'
 
 
@@ -14,7 +15,12 @@ import * as VueRouter from 'vue-router'
       path: '/about',
       name: 'About',
       component: AboutToi
-    }
+    },
+    {
+      path: '/toi',
+      name: 'Toi',
+      component: HomeView
+    },
   ]
   const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),
