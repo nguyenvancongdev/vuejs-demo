@@ -11,9 +11,9 @@
       </v-col>
 
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
+        
+         <v-btn @click="conso()">hello</v-btn>
        
-        </h1>
 
 
         <p class="subheading font-weight-regular">
@@ -98,6 +98,7 @@ export default {
   name: 'HelloWorld',
 
   data: () => ({
+    res: null,
     ecosystem: [
       {
         text: 'vuetify-loader',
@@ -145,5 +146,21 @@ export default {
       },
     ],
   }),
+  methods:{
+    conso(){
+      // cần phải test thật tốt cho giá trị ""
+      // tìm kiếm gía trị 
+      let a = this.res?.hanh 
+      let b = this.res?.hanh || []
+      
+      let c = b[0]?.hanh 
+      console.log(a)
+      console.log('b la', b)
+      console.log('c la', c)
+     
+      //this.res = null thì khi chấm sẽ bị lỗi 
+    }
+
+  },
 }
 </script>

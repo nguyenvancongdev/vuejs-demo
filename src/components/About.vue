@@ -1,5 +1,5 @@
 <template>
-    chào
+    
    </template>
    
    <script>
