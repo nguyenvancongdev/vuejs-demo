@@ -1,26 +1,25 @@
 
 import HelloWorld from '@/components/HelloWorld'
-import AboutToi from '@/components/About'
-import HomeView from '@/views/HomeView'
+// import AboutToi from '@/components/About'
+import UserScreen from '@/views/User'
+import NotFound from '@/views/NotFound'
+
 import * as VueRouter from 'vue-router'
 
 
   const routes = [ 
     {
-      path: '/', ///path của route
-      name: 'Hello', // tên route
-      component: HelloWorld // component route sử dụng
+      path: '/user', 
+      component: UserScreen, 
+      children: [
+        {
+          path: 'posts',
+          component: HelloWorld,
+        },
+      ],
     },
-    {
-      path: '/about',
-      name: 'About',
-      component: AboutToi
-    },
-    {
-      path: '/toi',
-      name: 'Toi',
-      component: HomeView
-    },
+    {path: '/', redirect: '/user/posts'},
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   ]
   const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),

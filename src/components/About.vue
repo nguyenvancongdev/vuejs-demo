@@ -1,5 +1,5 @@
-<template>
-    helo
+<template> 
+    helo chao anh em
    </template>
    
    <script>

@@ -150,13 +150,21 @@ export default {
     conso(){
       // cần phải test thật tốt cho giá trị ""
       // tìm kiếm gía trị 
-      let a = this.res?.hanh 
-      let b = this.res?.hanh || []
+      // let a = this.res?.hanh 
+      // let b = []
       
-      let c = b[0]?.hanh 
-      console.log(a)
-      console.log('b la', b)
-      console.log('c la', c)
+      // let c = (b?.hanh?.length )?  b?.hanh[4].cong[5] : "" 
+      // console.log(a)
+      // console.log('b la', b)
+      // console.log('c la', c)
+// tiep truc
+// ko the true false voi 
+// ""
+
+      let a = "0"
+      if (a){
+        console.log('1000', a)
+      }
      
       //this.res = null thì khi chấm sẽ bị lỗi 
     }
