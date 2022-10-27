@@ -19,7 +19,9 @@ import * as VueRouter from 'vue-router'
       ],
     },
     {path: '/', redirect: '/user/posts'},
-    { path: '/:pathMatch(.*)*',  redirect: '/404',name: 'NotFound', component: NotFound },
+    { path: '/:pathMatch(.*)*',  redirect: '/404' },
+    { path: '/404',name: 'NotFound', component: NotFound },
+    
   ]
   const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),
