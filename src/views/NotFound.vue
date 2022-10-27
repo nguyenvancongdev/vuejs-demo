@@ -1,6 +1,6 @@
 <template>
     <div class="">
-     <v-btn>back to home dang co loi xin   rrtt rr chao anh em </v-btn>
+     <v-btn>  <router-link to="/">back to home</router-link></v-btn>
     </div>
 
  </template>
