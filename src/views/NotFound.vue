@@ -1,6 +1,6 @@
 <template>
     <div class="">
-     <v-btn>back to home dang co loi</v-btn>
+     <v-btn>back to home dang co loi xin chao anh em </v-btn>
     </div>
 
  </template>
