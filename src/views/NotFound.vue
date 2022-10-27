@@ -1,6 +1,6 @@
 <template>
     <div class="">
-     <v-btn>back to home</v-btn>
+     <v-btn>back to home dang co loi</v-btn>
     </div>
 
  </template>
