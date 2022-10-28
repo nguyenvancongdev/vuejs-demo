@@ -18,6 +18,16 @@ import * as VueRouter from 'vue-router'
         },
       ],
     },
+    {
+      path: '/admin', 
+      component: UserScreen, 
+      children: [
+        {
+          path: 'posts',
+          component: HelloWorld,
+        },
+      ],
+    },
     {path: '/', redirect: '/user/posts'},
     { path: '/:pathMatch(.*)*',  redirect: '/404' },
     { path: '/404',name: 'NotFound', component: NotFound },
