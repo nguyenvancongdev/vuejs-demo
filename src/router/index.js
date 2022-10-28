@@ -1,8 +1,9 @@
 
 import HelloWorld from '@/components/HelloWorld'
 // import AboutToi from '@/components/About'
-import UserScreen from '@/views/User'
-import NotFound from '@/views/NotFound'
+import UserScreen from '@/views/user/index'
+import NotFound from '@/views/404/index'
+import LoginAdmin from '@/views/login/index'
 
 import * as VueRouter from 'vue-router'
 
@@ -27,6 +28,9 @@ import * as VueRouter from 'vue-router'
           component: HelloWorld,
         },
       ],
+    },
+    {
+      path: '/login', component: LoginAdmin,
     },
     {path: '/', redirect: '/user/posts'},
     { path: '/:pathMatch(.*)*',  redirect: '/404' },
